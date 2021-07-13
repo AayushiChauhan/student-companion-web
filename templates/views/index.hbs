@@ -1,0 +1,57 @@
+{{!-- handelbars (hbs) is a view engine of express --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    {{!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"> --}}
+    <title>Student Ally</title>
+</head>
+<body>
+    {{!-- <button class="btn btn-success">Fanstastic</button> 
+    use navbar.hbs file here in index file
+    --}}
+    {{>navbar}}
+    
+    {{!-- mt-5 margin top =5 
+    col-md-10 medium device space=10
+    col-12 mobile device space=12
+    mx-auto both should be on center ie equal space from both left and right side
+
+    order property==> change the visual order of specific flex items with a handful of order 
+    0 means normal order
+    1 means item should be displayed below
+    --}}
+    {{!-- Task section starts --}}
+    {{>tasks}}
+    {{!-- Task section ends --}}
+
+    {{!-- courses section starts --}}
+    {{>courses}}
+    {{!-- courses section ends --}}
+    
+    {{!-- Resume section starts --}}
+    {{>resume}}
+    {{!--Resume  section ends --}}
+
+    {{!-- services section starts --}}
+    {{>services}}
+    {{!--services  section ends --}}
+
+    {{!-- maps section starts --}}
+    {{>maps}}
+    {{!--maps  section ends --}}
+
+
+    {{!-- contact section starts --}}
+    {{!--{{>contact}}--}}
+    {{!--contact  section ends --}}
+        {{!-- including jquery and bootstrap js here in this index.hbs file! --}}
+    <script src="../jq/jquery.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.js" type="text/javascript"></script>
+</body>
+</html>

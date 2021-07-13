@@ -1,0 +1,22 @@
+{
+  "name": "nodedemoproject",
+  "version": "1.0.0",
+  "description": "first ever node js project made. Next destination is Student Companion Web app",
+  "main": "demo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js -e js,hbs"
+  },
+  "author": "Aayushi Chauhan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.0.2",
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "jquery": "^3.6.0",
+    "mongoose": "^5.13.2",
+    "pug": "^3.0.2",
+    "validator": "^13.6.0"
+  }
+}
