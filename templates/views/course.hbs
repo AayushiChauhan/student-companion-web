@@ -6,14 +6,142 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     {{!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"> --}}
     <title>My Courses</title>
+
+    <style>
+        span{
+            border: 3px;
+            border-radius: 2px;
+            border-color: black;
+            background-color:aliceblue;
+            
+        }
+    </style>
 </head>
 <body>
     {{!-- <button class="btn btn-success">Fanstastic</button> 
     use navbar.hbs file here in index file
     --}}
     {{>navbar}}
+    <div class="container-fluid mt-5 contact-style">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+                <h1 class="text-center sub-heading" style="font-size: medium;">Core course required credits:<span>{{demo.cr}}</span> GER required credits:<span>{{demo.gr}}</span> Major elective required credits:<span>{{demo.mr}}</span> </h1>
+                
+                <h1 class="text-center sub-heading"style="font-size: medium;">Core course taken credits:<span>{{demo.ct}}</span> GER taken credits:<span>{{demo.gt}}</span> Major elective taken credits:<span>{{demo.mt}}</span> </h1>
+                    <div class="row">
+                        <div class="col-md-8 col-12 mx-auto">
+                            <h1>Filter Courses</h1>
+                            <form action="/display-course" method="GET">
+                            <table class="table">
+                            <thead>
+                            <tr class="table-active">
+                                <th >Search course by category</th>
+                                <th >Search course by faculty</th>
+                                <th >Search course by credits</th>
+                                <th ></th>
+                            </tr>
+                            </thead>
+                        
+                            <tbody>
+                                <tr>
+                                <td >  <select name="course_cat">
+                                    <option value="" selected disabled hidden>Select & search by Category</option>
+                                    <option>Accounts</option>
+                                    <option>Finance</option>
+                                    <option>Mathematics</option>
+                                    <option>Life Science</option>
+                                    <option>Economics</option>
+
+                                </select></th>
+                                <td >  <select name="course_faculty">
+                                    <option value="" selected disabled hidden>Select & search by Faculty</option>
+                                    <option>Kuntal Patel</option>
+                                    <option>Ashok Ranade</option>
+                                    <option>Preeti Manek</option>
+                                    <option>Dhaval Patel</option>
+                                    <option>Shrikrishnan Divakaran</option>
+
+                                </select></th>
+                                <td >  <select name="course_credit">
+                                    <option value="" selected disabled hidden>Select & search by Course Credit</option>
+                                    <option>1.5</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>OTHER</option>
+
+                                </select></th>
+                                {{!-- <td > <input type="date" name="date" required></th> --}}
+                                <td ><input type="submit"  class="btn btn-success"id="add" value="Search"></th>
+                                </tr>
+                            </tbody>
+                            </form>
+                        </table>
+                        {{!-- <h1>My Courses</h1>
+                    <form action="/course" method="GET">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            
+                            <th style="font-size: 1.5rem; font-weight:900">Course Name</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">Course Category</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">Course Credit</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">Course Faculty</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">Course Rating</th>
+
+                            </tr>
+                          </thead>
+
+                    {{#each course}}
+                    <tr>  
+                      <td><p id="course-name">{{this.course_name}}</p></td>
+                      <td><p id="course-category">{{this.course_cat}}</p></td>
+                      <td><p id="course-credit">{{this.course_credit}}</p></td>
+                      <td><p id="course-faculty">{{this.course_faculty}}</p></td>
+                      <td><p id="course-rating">{{this.course_rating}}</p></td>
+                    </tr>                    
+                    {{/each}}
+
+                    </form> 
+                      --}}
+                     <h1>selected Courses</h1>
+                     <form action="/display-course" method="GET">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            
+                            <th style="font-size: 1.5rem; font-weight:900">Course Name</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">Course Category</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">Course Credit</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">Course Faculty</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">Course Rating</th>
+
+                            </tr>
+                          </thead>
+
+                    {{#each course}}
+                    <tr>  
+                      <td><p id="course-name">{{this.course_name}}</p></td>
+                      <td><p id="course-category">{{this.course_cat}}</p></td>
+                      <td><p id="course-credit">{{this.course_credit}}</p></td>
+                      <td><p id="course-faculty">{{this.course_faculty}}</p></td>
+                      <td><p id="course-rating">{{this.course_rating}}</p></td>
+                    </tr>                    
+                    {{/each}}
+
+                    </form>
+                    
+
+</table>
+
+                                    </div>
+                    </div>   
+            </div>
+        </div>
+    </div>
 
         {{!-- including jquery and bootstrap js here in this index.hbs file! --}}
     <script src="../jq/jquery.js" type="text/javascript"></script>

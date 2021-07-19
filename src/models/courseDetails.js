@@ -5,25 +5,32 @@ const mongoose=require("mongoose");
 //This library validates and sanitizes strings only.
 const validator=require("validator");
 
-const taskSchema= new mongoose.Schema({
-    name:{
+const courseSchema= new mongoose.Schema({
+    course_name:{
         type:String,
         required:true,
     },
-    description:{
+    course_cat:{
         type:String,
         required:true,
-        min:3
     },
-    date:{
-        type:Date,
+    course_credit:{
+        type:Number,
+        required:true,
+    },
+    course_faculty:{
+        type:String,
+        required:true,
+    },
+    course_rating:{
+        type:Number,
         required:true,
     },
 })
 //we need a collection
 //here parameter name should be singular only and also capitalized!even if it's plural like Users write User only
 //and it will be automatically understood as Users if Users exist.
-const Task=new mongoose.model("Task",taskSchema);
+const Course=new mongoose.model("Course",courseSchema);
 //export the schema named "Task"
-module.exports=Task;
+module.exports=Course;
 

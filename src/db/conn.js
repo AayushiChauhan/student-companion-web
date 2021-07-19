@@ -1,5 +1,7 @@
 
 const mongoose=require('mongoose');
+//const ObjectID =require('mongodb').ObjectID;
+//const dbname="studentdb";
 
 //creating a database
 //.connect is a promise function in mongoose
@@ -14,8 +16,14 @@ mongoose.connect("mongodb://localhost:27017/studentdb",{//database named student
 }).catch((error)=>{
     console.log(error);
 })
+// aquire the connection (to check if it is successful)
+const db = mongoose.connection;
+// exporting the database
+module.exports=db;
 // module.exports={mongoose};
-
+// const getPrimaryKey=(_id)=>{
+//     return objectID(_id);
+// }
 
 //code written refering that article on mongodb!
 // const MongoClient=require('mongodb').MongoClient

@@ -33,10 +33,39 @@
                 <h1 class="text-center sub-heading">Managing tasks has become easier than ever before!</h1>
                
                 <div class="row">
-                    <div class="col-md-6 col-12 mx-auto">
+                    <div class="col-md-8 col-12 mx-auto">
 
-                        <form action="/task" method="POST">
-                        <div class="form-group">
+                <form action="/task" method="POST">
+                <table class="table">
+                <thead>
+                  <tr class="table-active">
+                    <th >Add Task</th>
+                    <th >Description</th>
+                    <th >date</th>
+                    <th ></th>
+                  </tr>
+                </thead>
+            
+            
+                <tbody>
+                    <tr>
+                      <td> <input type="text" name="name"placeholder="task name" required></input></th>
+                      <td >  <select name="description" required>
+
+                        <option>PERSONAL</option>
+                        <option>WORK</option>
+                        <option>SCHOOL</option>
+                        <option>CLEANING</option>
+                        <option>OTHER</option>
+
+                    </select></th>
+                      <td > <input type="date" name="date" required></th>
+                      <td ><input type="submit"  class="btn btn-success"id="add" value="ADD TASK"></th>
+                    </tr>
+                </tbody>
+            
+            </table>
+                        {{!-- <div class="form-group">
                             <label for="exampleInputName" class="form-label">Name</label>
                             <input type="text" class="form-control" id="exampleInputName" 
                             placeholder="Enter Task Name" name="name">
@@ -52,16 +81,72 @@
                             <input type="text" class="form-control" id="exampleInputName"
                             placeholder="Of format dd-mm-yyyy" name="dueDate">
                         </div>
-                        <button type="submit" class="btn-style btn-primary">Submit</button>
+                        <button type="submit" class="btn-style btn-primary">Submit</button> --}}
                         </form>
-                     
+                    <h1 align="center">TASKS LIST</h1>
+                    <form action="/delete-task" method="GET">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            
+                              <th style="font-size: 1.5rem; font-weight:900">Select</th>
+                              <th style="font-size: 1.5rem; font-weight:600;">Task</th>
+                              <th style="font-size: 1.5rem; font-weight:600;">Description</th>
+                            <th style="font-size: 1.5rem; font-weight:600;">due date</th>
+                            </tr>
+                          </thead>
+                        {{!-- <ul class="people_list">
+                        {{#each task}} 
+                            <li> {{#each this}} </li>  
+                            {{this}}  
+                            {{/each}}
+                        {{/each}}
+</ul> --}}
+
+                    {{#each task}}
+                    <tr>  
+                      <td> <input type="checkbox" name="{{this._id}}"></td>
+                      <td><p id="task-name">{{this.name}}</p></td>
+                      <td><p id="task-description">{{this.description}}</p></td>
+                      <td><p id="due-date">{{this.date}}</p></td>
+                      </tr>                    
+                    {{/each}}
+                    {{!--               <td> <input type="checkbox" name="<%= i._id %>" ></td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.date}}</td> --}}
+                       {{!-- {{task.name}} has the following skills : <br>
+        {{#each task.skills}}
+            {{this}} <br>
+        {{/each}} --}}
+
+                        {{!-- <% for(let i of task) { %>
+                            
+
+<tr>
+
+                               <td> <input type="checkbox" name="<%= i._id %>" ></td>
+                               <td> <p id="task-name"><%= i.name %></td>
+                                <td><p id="task-description"></p>: <%= i.description %></td>
+                                <td><p id="due-date">: <%= i.date %></p></td>
+</tr>
+                    
+
+                        <% } %> --}}
+                            
+                
+
+                           
+</table>
+<div  align = "center"><input type="submit" class="btn btn-danger" value="DELETE TASK">
+                </div>></form> 
                      </div>
             
                 
             </div>
         </div>
     </div>
-
+</div>
 
 
     {{!-- <form action="/task" method="POST">

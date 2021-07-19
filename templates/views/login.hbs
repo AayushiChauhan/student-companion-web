@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    </head>
+<body>
+
+    {{>navbar}}
+
+<div class="container-fluid mt-5 contact-style">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+                
+                <h1 class="text-center sub-heading">Login to your account</h1>
+               
+                <div class="row">
+                    <div class="col-md-6 col-12 mx-auto">
+
+                        <form action="/contact" method="POST">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter your Email" name="email">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputMessage">Password</label>
+                            <input type="text" class="form-control" id="exampleInputName"
+                            placeholder="Enter your Password" name="message">
+
+                        <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+                        
+                        <body>
+                        <div id="my-signin2"></div>
+                        <script>
+                        function onSuccess(googleUser) {
+                        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+                        }
+                        function onFailure(error) {
+                        console.log(error);
+                        }
+                        function renderButton() {
+                        gapi.signin2.render('my-signin2', {
+                            'scope': 'profile email',
+                            'width': 240,
+                            'height': 50,
+                            'longtitle': true,
+                            'theme': 'dark',
+                            'onsuccess': onSuccess,
+                            'onfailure': onFailure
+                        });
+                        }
+                    </script>
+
+                    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+                    </body>
+                        </div>
+                        <button type="Login" class="btn-style btn-primary">Login</button>
+                        </form>
+                            
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+    <script src="../jq/jquery.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.js" type="text/javascript"></script>
+</body>
+</html>
