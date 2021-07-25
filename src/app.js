@@ -1,5 +1,6 @@
-const express=require('express');
+const express=require('express');//import express module
 require("./db/conn");
+//for contact form validation
 const Contact=require("./models/contactDetails");
 const Task=require("./models/taskDetails");
 const Course=require("./models/courseDetails");
@@ -32,21 +33,13 @@ const staticpath=path.join(__dirname,'../public');
 const templatepath=path.join(__dirname,'../templates/views');
 const partialpath=path.join(__dirname,'../templates/partials');
 
-
-
-
-
-
-
 app.use('/css',express.static(path.join(__dirname,"../node_modules/bootstrap/dist/css")));
 app.use('/js',express.static(path.join(__dirname,"../node_modules/bootstrap/dist/js")));
 app.use('/jq',express.static(path.join(__dirname,"../node_modules/jquery/dist")));
-//if we submit contact us form then data entered should be encoded and then displayed (ie we get that entered data)
-app.use(express.json());
 
+app.use(express.json());
 // to use encrypted data
 app.use(express.urlencoded());
-
 
 
 //middleware
@@ -55,12 +48,12 @@ app.use(express.static(staticpath));
 
 //set the view engine in express
 app.set('view engine', 'ejs');
+ //app.engine('hbs', exhbs());
+ app.set('view engine', 'hbs');
 
-app.set('view engine', 'hbs');
 
+//app.set("view engine","hbs");
 
-
-//basically below command tells express how to get "views" folder through "templatepath"
 app.set("views",templatepath);
 
 
@@ -77,7 +70,7 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/about',(req,res)=>{
-   
+    
     res.render("about")
     
 })
@@ -87,10 +80,8 @@ app.get('/contact',(req,res)=>{
 app.get('/login',(req,res)=>{
         res.render("login")
     })
-const generateAuthToken = () => {
-        return crypto.randomBytes(30).toString('hex');
-    }
-    
+
+
 app.post('/login', function(req, res){
         
          Student.findOne({
@@ -100,7 +91,7 @@ app.post('/login', function(req, res){
              if(login){
                  console.log(login)
                 sessionStorage.setItem('id', login._id);
-                
+ 
                 console.log(sessionStorage.getItem('id')); 
                  res.render('', {
                      login: login,                         
@@ -159,7 +150,7 @@ app.get('/course', function(req, res){
                 return;
             }
             return res.render('course', {
-              
+                // tittle: "Home",
                 course: course,
                 mycourse:mycourse,
                 demo:demo,
@@ -178,15 +169,14 @@ app.get('/mycourse', function(req, res){
             return;
         }
 
-        return res.render('course', {
+        return res.render('mycourse', {
             // tittle: "Home",
             mycourse: mycourse,
-            //demo:demo,
+            demo:demo,
         });
     }
 )});
 
-    
 //display the filtered course only
 app.get('/display-course', function(req, res){
    
@@ -197,12 +187,11 @@ app.get('/display-course', function(req, res){
         }
 
         return res.render('course', {
-            // tittle: "Home",
+            
             course: course,
         });
     }
 )});
-
 
 //create a new contact in our database
 app.post('/contact', async (req,res)=>{
@@ -261,4 +250,3 @@ app.get('/delete-task', function(req, res){
 app.listen(port,()=>{
     console.log(`server is running at port no. ${port}`)
 })
-

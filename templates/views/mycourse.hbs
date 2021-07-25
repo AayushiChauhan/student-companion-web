@@ -49,20 +49,10 @@
     </style>
     
 </head>
-<body onload="javascript:hideTable()">
+<body>
     
 
-    <script>
-function showTable(){
-document.getElementById('table').style.display = "table-row";
-}
-function hideTable(){
-document.getElementById('table').style.display = "none";
-}
-</script>
-    {{!-- <button class="btn btn-success">Fanstastic</button> 
-    use navbar.hbs file here in index file
-    --}}
+    
     {{>navbar}}
     <div class="container-fluid mt-5 contact-style">
         <div class="row">
@@ -73,93 +63,59 @@ document.getElementById('table').style.display = "none";
                 
                     <div class="row">
                         <div class="col-md-8 col-12 mx-auto">
-                            <h1>Filter Courses</h1>
-                            <form action="/display-course" method="GET">
-                            <table class="table1">
-                            <thead>
-                            <tr class="table-active">
-                                <th >Search course by category</th>
-                                <th >Search course by faculty</th>
-                                <th >Search course by credits</th>
-                                <th ></th>
-                            </tr>
-                            </thead>
-                        
-                            <tbody>
-                                <tr>
-                                <td >  <select name="course_cat">
-                                    <option value="" selected disabled hidden>Select & search by Category</option>
-                                    <option>GER</option>
-                                    <option>Core</option>
-                                    <option>Major elective</option>
-                                    <option>Economics</option>
-
-                                </select></th>
-                                <td >  <select name="course_faculty">
-                                    <option value="" selected disabled hidden>Select & search by Faculty</option>
-                                    <option>Kuntal Patel</option>
-                                    <option>Ashok Ranade</option>
-                                    <option>Preeti Manek</option>
-                                    <option>Dhaval Patel</option>
-                                    <option>Shrikrishnan Divakaran</option>
-
-                                </select></th>
-                                <td >  <select name="course_credit">
-                                    <option value="" selected disabled hidden>Select & search by Course Credit</option>
-                                    <option>1.5</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>OTHER</option>
-
-                                </select></th>
-                                {{!-- <td > <input type="date" name="date" required></th> --}}
-                                <td ><input type="submit"  class="btn btn-success"id="add" value="Search"></th>
-                                </tr>
-                            </tbody>
-                            </table>
-                            </form>
-                        </div>
-                        </div>    
-                    <div class="row">
-                        <div class="col-md-8 col-12 mx-auto"> 
+                         
                      
+                    <form action="/mycourse" method="GET">
                      
-                     {{!-- <h1>selected Courses</h1> --}}
-                    <h1> course directory</h1>
-                     <form action="/display-course" method="GET">
-                    <table class="table3">
+                    <table id="table" class="table">
                         <thead>
                             <tr>
-                            
                             <th style="font-size: 1.5rem; font-weight:900">Course Name</th>
                             <th style="font-size: 1.5rem; font-weight:600;">Course Category</th>
                             <th style="font-size: 1.5rem; font-weight:600;">Course Credit</th>
                             <th style="font-size: 1.5rem; font-weight:600;">Course Faculty</th>
                             <th style="font-size: 1.5rem; font-weight:600;">Course Rating</th>
-
                             </tr>
                           </thead>
 
-                    {{#each course}}
+                    {{#each mycourse}}
                     <tr>  
-                      
-                    <td><p id="course-name" >{{this.course_name}}</p></td>
+                    <td>
+                    <button class="btn" id="sure">
+                    <p id="course-name" style="font: size 25px;font-weight:600"><i class="fas fa-plus" style="color:mediumslateblue;"></i>{{this.course_name}}</button>
+                      </p>
+                      {{!-- <button onclick="choose()">{{this.course_name}}</button> --}}
+                      </td>
+                    
+       
                       <td><p id="course-category">{{this.course_cat}}</p></td>
                       <td><p id="course-credit">{{this.course_credit}}</p></td>
                       <td><p id="course-faculty">{{this.course_faculty}}</p></td>
                       <td><p id="course-rating">{{this.course_rating}}</p></td>
                     </tr>                    
                     {{/each}}
+                    <script>
+                        function choose(){
+                            demo.ct+=2;
+                        }
+                    </script>
+                     <script>
+    document.getElementById("sure")
+    .addEventListener("click", function( e ){ //e => event
+        if( ! confirm("sure, you completed this course?") ){
+            e.preventDefault(); // ! => don't want to do this
+        } else {
+            //want to do this! => maybe do something about it?
+            alert('your credits are updated succesfully!');
+        }
+    });</script>
+
+
                      
                      </table>
                     </form>
-                    
-
-
-
-                                    </div>
-                    </div>   
+                    </div>
+                </div>      
             </div>
         </div>
     </div>
