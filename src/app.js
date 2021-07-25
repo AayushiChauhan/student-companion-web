@@ -91,7 +91,7 @@ app.post('/login', function(req, res){
              if(login){
                  console.log(login)
                 sessionStorage.setItem('id', login._id);
- 
+                sessionStorage.setItem('useremail', login.useremail);
                 console.log(sessionStorage.getItem('id')); 
                  res.render('', {
                      login: login,                         
@@ -113,7 +113,8 @@ app.post('/login', function(req, res){
 // rendering the task Page
 app.get('/task', function(req, res){
     var id=sessionStorage.getItem('id');
-    console.log(id);
+    var useremail=sessionStorage.getItem('useremail');
+    // console.log(id);
     Task.find({studentId:id}, function(err, task){
         if(err){
             console.log('Error in fetching tasks from db');
@@ -208,7 +209,7 @@ app.post('/contact', async (req,res)=>{
         res.status(400).send(error);
         }
    })
-// creating Tasks
+// creating Tasks and reminding user of the task
 app.post('/task', function(req, res){
     //  console.log("Creating Task");
       
@@ -220,7 +221,64 @@ app.post('/task', function(req, res){
           }, function(err, newtask){
           if(err){console.log('error in creating task', err); return;}
           
-  
+            
+            let content = 'BEGIN:VCALENDAR\n' +
+            'VERSION:2.0\n' +
+            'BEGIN:VEVENT\n' +
+            'SUMMARY: Reminder\n' +
+            'DTSTART;VALUE=DATE:20201030T093000Z\n' +
+            'DTEND;VALUE=DATE:20201030T113000Z\n' +
+            'LOCATION:Webex \n' +
+            'DESCRIPTION:Description123\n' +
+            'STATUS:CONFIRMED\n' +
+            'SEQUENCE:3\n' +
+            'BEGIN:VALARM\n' +
+            'TRIGGER:-PT10M\n' +
+            'DESCRIPTION:Description123\n' +
+            'ACTION:DISPLAY\n' +
+            'END:VALARM\n' +
+            'END:VEVENT\n' +
+            'END:VCALENDAR';
+
+                
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true, 
+                auth: {
+                    user: "priyanka.p@ahduni.edu.in",
+                    pass: "piyupatel@seas19"
+                }
+            })
+
+            let toEmail = "aayushi.c@ahduni.edu.in";
+            let text = "Project Work";
+
+            let mailOptions = {
+                from: "priyanka.p@ahduni.edu.in",
+                to: sessionStorage.getItem('useremail'),
+                subject: "Stxudent Ally Tasks",
+                text: text,
+                icalEvent: {
+                    filename: 'invitation.ics',
+                    method: 'request',
+                    content: content
+                }
+            }
+
+            transporter.sendMail(mailOptions, function(err, sucess){
+                if(err) {
+                    console.log(err)
+                }
+                else {
+                    console.log("Email sent successfully")
+                }
+                tls: {
+                    rejectUnauthorized: false
+                }
+            });
+
+
           //console.log(newtask);
           return res.redirect('back');
   

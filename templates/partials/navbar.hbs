@@ -1,5 +1,30 @@
-{{!-- To have navbar in the center --}}
-<div class="container-fluid mt-5 navbar-style">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<script>
+        function func(){
+            var id=sessionStorage.id;
+            console.log(sessionStorage.id);
+            if(sessionStorage.id){
+              document.getElementById("in").style.visibility="hidden";
+            console.log(sessionStorage.id);
+
+            }else{
+              document.getElementById("out").style.visibility="hidden";
+            }
+          } 
+        window.onload = func;
+
+        </script>
+</head>
+<body>
+  {{!-- To have navbar in the center --}}
+  <div class="container-fluid mt-5 navbar-style">
         <div class="row">
             <div class="col-md-10 col-12 mx-auto">
 
@@ -11,7 +36,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      
+      <ul onload="func()" class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item px-3">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
@@ -19,7 +45,10 @@
           <a class="nav-link" href="/task">My Tasks</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link" href="/course">My courses</a>
+          <a class="nav-link" href="/course">Course Catalog</a>
+        </li>
+        <li class="nav-item px-3">
+          <a class="nav-link" href="/mycourse">My courses</a>
         </li>
         <li class="nav-item px-3">
           <a class="nav-link" href="/about">About Us</a>
@@ -27,17 +56,16 @@
         <li class="nav-item px-3">
           <a class="nav-link" href="/contact">Contact Us</a>
         </li>
-        <li class="nav-item px-3">
         
-          {{!-- {{#if sessionStorage.getItem('id')}}
-          <a class="nav-link" href="/login">Logout</a>
-          {{#else}}
-          <a class="nav-link" href="/login">Login</a>
-          {{/if}} --}}
+        <li id="in" class="nav-item px-3">
           <a class="nav-link" href="/login">Login</a>
         </li>
+        <li id="out" class="nav-item px-3">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        
       </ul>
-     
+      
       
     </div>
   </div>
@@ -46,3 +74,5 @@
             </div> 
          </div> {{!--  closing  div class="row" --}}
     </div> {{!--   closing div class="container-fluid" --}}
+</body>
+</html>
