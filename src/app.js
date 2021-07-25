@@ -4,11 +4,23 @@ require("./db/conn");
 const Contact=require("./models/contactDetails");
 const Task=require("./models/taskDetails");
 const Course=require("./models/courseDetails");
+const Mycourse=require("./models/mycourseDetails");
+const Student=require("./models/student")
+const mongoose=require("mongoose")
+const mongodb=require("mongodb")
+const db=require("./db/conn")
+const cookieParser = require('cookie-parser');
+const crypto=require("crypto")
+const authTokens=require("auth-tokens")
+const sessionStorage = require('node-sessionstorage');
+
+
 const hbs=require("hbs");
 //if we want to make static website then include public folder and call it here in app.js file 
 const path=require('path');
 const bodyParser=require('body-parser');
-const nodemailer=require("nodemailer")
+const nodemailer=require("nodemailer");
+const { connect } = require('http2');
 
 const collection="tasks";
 
@@ -17,6 +29,8 @@ const collection="tasks";
 const app=express();//all the properties and methods of express module will be stored in app variable
 const port=process.env.PORT || 3000;
 app.use(bodyParser.json());
+app.use(cookieParser());
+
 //setting the path
 const staticpath=path.join(__dirname,'../public');
 const templatepath=path.join(__dirname,'../templates/views');
@@ -73,15 +87,7 @@ app.get('/',(req,res)=>{
 //     //res.send("hey there");
 // })
 
-//to show dynamic variables in course.hbs file
-var demo = {
-    cr : 110,
-    ct: 63,
-    gr : 50,
-    gt: 30,
-    mr : 40,
-    mt: 33,
-}
+
   
 // app.get('/', (req, res)=>{
 //      res.render('dynamic', {demo : demo})
@@ -99,13 +105,77 @@ app.get('/about',(req,res)=>{
 app.get('/contact',(req,res)=>{
      res.render("contact")
     })
-    app.get('/login',(req,res)=>{
+app.get('/login',(req,res)=>{
         res.render("login")
-        })
+    })
+const generateAuthToken = () => {
+        return crypto.randomBytes(30).toString('hex');
+    }
+    // This will hold the users and authToken related to users
+    const authToken={}
+    app.use((req, res, next) => {
+        const authToken = req.cookies['AuthToken'];
+        req.user = authTokens[authToken];
+        next();
+    });
 
+    // app.post('/login', (req, res) => {
+    //     const { useremail, password } = req.body;
+       
+    
+    //     const user = Student.find(u => {
+    //         return u.useremail === useremail && password === u.password
+    //     });
+    
+    //     if (user) {
+    //         const authToken = generateAuthToken();
+    
+    //         authTokens[authToken] = useremail;
+    
+    //         res.cookie('AuthToken', authToken);
+    //         res.redirect('');
+    //         return;
+    //     } else {
+    //         res.render('login', {
+    //             message: 'Invalid username or password',
+    //             messageClass: 'alert-danger'
+    //         });
+    //     }
+    // });
+
+app.post('/login', function(req, res){
+        
+         Student.findOne({
+             useremail:req.body.useremail,
+             password:req.body.password,
+        }).then( login =>{
+             if(login){
+                 console.log(login)
+                sessionStorage.setItem('id', login._id);
+ 
+                console.log(sessionStorage.getItem('id')); 
+                 res.render('', {
+                     login: login,                         
+                    }
+                 )
+             }
+             else{
+                 console.log("User doesnot exist")
+                 res.render('login',{
+                     
+                     err: true
+                 })
+             }
+         }).catch(err=>{
+             console.log(err);
+         })
+        });
+        
 // rendering the task Page
 app.get('/task', function(req, res){
-    Task.find({}, function(err, task){
+    var id=sessionStorage.getItem('id');
+    console.log(id);
+    Task.find({studentId:id}, function(err, task){
         if(err){
             console.log('Error in fetching tasks from db');
             return;
@@ -117,10 +187,85 @@ app.get('/task', function(req, res){
         });
     }
 )});
+// const pipeline=Mycourse.aggregate([{
+//     $group: {
+//       _id: "Core",
+//       totalCredits: {
+//         $sum: "$course_credit"
+//       }
+//     }
+//   }])
 
+
+// var coretaken=Mycourse.aggregate(
+//     [
+//       {
+//         $group: {
+//           _id: "Core",
+//           totalCredits: {
+//             $sum: "$course_credit"
+//           }
+//         }
+//       }
+//     ])
+    // console.log(pipeline)
+//to show dynamic variables in course.hbs file
+var demo = {
+    cr : 110,
+    ct: 33 ,
+    gr : 50,
+    gt: 30,
+    mr : 40,
+    mt: 33,
+}
 // rendering the courses Page
 app.get('/course', function(req, res){
+    
     Course.find({}, function(err, course){
+        if(err){
+            console.log('Error in fetching tasks from db');
+            return;
+        }
+        Mycourse.find({},function(err,mycourse){
+            if(err){
+                console.log('Error in fetching tasks from db');
+                return;
+            }
+            return res.render('course', {
+                // tittle: "Home",
+                course: course,
+                mycourse:mycourse,
+                demo:demo,
+            });
+        })
+        
+    })
+});
+// app.get('/course', function(req, res) {
+//     Mycourse.aggregate(
+//       [
+//         {
+//           $group: {
+//             _id: {course_cat:"$course_cat"},
+//             totalCredits: {
+//               $sum: "$course_credit"
+//             }
+//           }
+//         }
+//       ],
+//       function(err, result) {
+//         if (err) {
+//           res.send(err);
+//         } else {
+//           res.json(result);
+//         }
+//       }
+//     );
+//   });
+//display my course only
+app.get('/mycourse', function(req, res){
+    var id=sessionStorage.getItem('id');
+    Mycourse.find({studentId:id}, function(err, mycourse){
         if(err){
             console.log('Error in fetching tasks from db');
             return;
@@ -128,11 +273,26 @@ app.get('/course', function(req, res){
 
         return res.render('course', {
             // tittle: "Home",
-            course: course,
-            demo:demo,
+            mycourse: mycourse,
+            //demo:demo,
         });
     }
 )});
+//display my course only
+
+         //function(err, login){
+    //     if(err){
+    //         console.log('Error in fetching tasks from db');
+    //         return;
+    //     }
+    //     console.log(login)
+    //     return res.render('', {
+    //         // tittle: "Home",
+
+    //         login: login,
+    //         //demo:demo,
+    //     })
+    
 //display the filtered course only
 app.get('/display-course', function(req, res){
    
@@ -199,7 +359,8 @@ app.post('/task', function(req, res){
       Task.create({
         name: req.body.name,  
         description: req.body.description,
-        date: req.body.date
+        date: req.body.date,
+        studentId:sessionStorage.getItem('id')
           }, function(err, newtask){
           if(err){console.log('error in creating task', err); return;}
           
@@ -257,6 +418,7 @@ app.get('/delete-task', function(req, res){
 app.listen(port,()=>{
     console.log(`server is running at port no. ${port}`)
 })
+
 // var transporter = nodemailer.createTransport({
 //     service: 'gmail',
 //     auth: {

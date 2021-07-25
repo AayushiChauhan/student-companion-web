@@ -1,4 +1,6 @@
 {{!-- handelbars (hbs) is a view engine of express --}}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    {{!-- for button icons from fontawesome icons  --}}
+    <script src="https://kit.fontawesome.com/bebf8bfc83.js" crossorigin="anonymous"></script>
     {{!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"> --}}
     <title>My Courses</title>
 
@@ -18,9 +22,44 @@
             background-color:aliceblue;
             
         }
+        .btn{
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1.3rem;
+        }
+        .btn.btn-success:hover{
+            color:black;
+            font-weight: 900;
+            background-color: rgb(106, 212, 115);
+        }
+        .btn.btn-danger:hover{
+            color:black;
+            font-weight: 900;
+            background-color:rgb(255, 111, 111);
+        }
+        .btn:hover{
+            color:darkblue;
+            background-color: rgb(205, 213, 216);
+        }
+        th{
+           
+            font-size: 20px;
+            font-weight: 800;
+            font-family:Verdana;
+        }
     </style>
+    
 </head>
-<body>
+<body onload="javascript:hideTable()">
+    
+
+    <script>
+function showTable(){
+document.getElementById('table').style.display = "table-row";
+}
+function hideTable(){
+document.getElementById('table').style.display = "none";
+}
+</script>
     {{!-- <button class="btn btn-success">Fanstastic</button> 
     use navbar.hbs file here in index file
     --}}
@@ -31,11 +70,12 @@
                 <h1 class="text-center sub-heading" style="font-size: medium;">Core course required credits:<span>{{demo.cr}}</span> GER required credits:<span>{{demo.gr}}</span> Major elective required credits:<span>{{demo.mr}}</span> </h1>
                 
                 <h1 class="text-center sub-heading"style="font-size: medium;">Core course taken credits:<span>{{demo.ct}}</span> GER taken credits:<span>{{demo.gt}}</span> Major elective taken credits:<span>{{demo.mt}}</span> </h1>
+                
                     <div class="row">
                         <div class="col-md-8 col-12 mx-auto">
                             <h1>Filter Courses</h1>
                             <form action="/display-course" method="GET">
-                            <table class="table">
+                            <table class="table1">
                             <thead>
                             <tr class="table-active">
                                 <th >Search course by category</th>
@@ -49,10 +89,9 @@
                                 <tr>
                                 <td >  <select name="course_cat">
                                     <option value="" selected disabled hidden>Select & search by Category</option>
-                                    <option>Accounts</option>
-                                    <option>Finance</option>
-                                    <option>Mathematics</option>
-                                    <option>Life Science</option>
+                                    <option>GER</option>
+                                    <option>Core</option>
+                                    <option>Major elective</option>
                                     <option>Economics</option>
 
                                 </select></th>
@@ -78,11 +117,18 @@
                                 <td ><input type="submit"  class="btn btn-success"id="add" value="Search"></th>
                                 </tr>
                             </tbody>
+                            </table>
                             </form>
-                        </table>
-                        {{!-- <h1>My Courses</h1>
-                    <form action="/course" method="GET">
-                    <table class="table">
+                        </div>
+                        </div>    
+                    <div class="row">
+                        <div class="col-md-8 col-12 mx-auto"> 
+                     
+                     <form action="/mycourse" method="GET">
+                    <input type='button' onClick='javascript:showTable();' value='Show My Courses' class="btn btn-success" >
+                    <input type='button' onClick='javascript:hideTable();' value='Hide My Courses' class="btn btn-danger">
+                    
+                    <table id="table" class="table">
                         <thead>
                             <tr>
                             
@@ -95,21 +141,47 @@
                             </tr>
                           </thead>
 
-                    {{#each course}}
+                    {{#each mycourse}}
                     <tr>  
-                      <td><p id="course-name">{{this.course_name}}</p></td>
+                      <td>
+                    {{!-- <button class="btn" id="sure">
+                    <p id="course-name" style="font: size 25px;font-weight:600"><i class="fas fa-plus" style="color:mediumslateblue;"></i>{{this.course_name}}</button>
+                      </p> --}}
+                      <button onclick="choose()">{{this.course_name}}</button>
+                      </td>
+                    
+       
                       <td><p id="course-category">{{this.course_cat}}</p></td>
                       <td><p id="course-credit">{{this.course_credit}}</p></td>
                       <td><p id="course-faculty">{{this.course_faculty}}</p></td>
                       <td><p id="course-rating">{{this.course_rating}}</p></td>
                     </tr>                    
                     {{/each}}
+                    <script>
+                        function choose(){
+                            demo.ct+=2;
+                        }
+                    </script>
+                     <script>
+    document.getElementById("sure")
+    .addEventListener("click", function( e ){ //e => event
+        if( ! confirm("sure, you completed this course?") ){
+            e.preventDefault(); // ! => don't want to do this
+        } else {
+            //want to do this! => maybe do something about it?
+            alert('your credits are updated succesfully!');
+        }
+    });
 
-                    </form> 
-                      --}}
-                     <h1>selected Courses</h1>
+
+                     </script>
+                     </table>
+                    </form>
+                    
+                     {{!-- <h1>selected Courses</h1> --}}
+                    <h1> course directory</h1>
                      <form action="/display-course" method="GET">
-                    <table class="table">
+                    <table class="table3">
                         <thead>
                             <tr>
                             
@@ -124,18 +196,20 @@
 
                     {{#each course}}
                     <tr>  
-                      <td><p id="course-name">{{this.course_name}}</p></td>
+                      
+                    <td><p id="course-name" >{{this.course_name}}</p></td>
                       <td><p id="course-category">{{this.course_cat}}</p></td>
                       <td><p id="course-credit">{{this.course_credit}}</p></td>
                       <td><p id="course-faculty">{{this.course_faculty}}</p></td>
                       <td><p id="course-rating">{{this.course_rating}}</p></td>
                     </tr>                    
                     {{/each}}
-
+                     
+                     </table>
                     </form>
                     
 
-</table>
+
 
                                     </div>
                     </div>   

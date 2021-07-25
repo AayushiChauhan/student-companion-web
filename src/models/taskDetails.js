@@ -19,6 +19,9 @@ const taskSchema= new mongoose.Schema({
         type:Date,
         required:true,
     },
+    studentId:{
+        type:String,
+    }
 })
 //we need a collection
 //here parameter name should be singular only and also capitalized!even if it's plural like Users write User only
