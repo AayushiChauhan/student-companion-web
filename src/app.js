@@ -64,11 +64,15 @@ hbs.registerPartials(partialpath);
 //app.get(path,callback) -syntax
 //if path parameter is / then simply path is your homepage
 app.get('/',(req,res)=>{
-    //here we want to render index.hbs file therefore simply write index inside render
-    res.render("index")
-    //res.send("hey there");
+    
+    res.render("login")
+    
 })
-
+app.get('/index',(req,res)=>{
+    
+    res.render("index")
+    
+})
 app.get('/about',(req,res)=>{
     
     res.render("about")
@@ -80,36 +84,64 @@ app.get('/contact',(req,res)=>{
 app.get('/login',(req,res)=>{
         res.render("login")
     })
+app.get("/studentlogin", (req, res) => {
+    res.render("studentlogin");
+    });
+app.get("/adminlogin", (req, res) => {
+    res.render("adminlogin");
+    });
 
-
-app.post('/login', function(req, res){
-        
-         Student.findOne({
-             useremail:req.body.useremail,
-             password:req.body.password,
-        }).then( login =>{
-             if(login){
-                 console.log(login)
-                sessionStorage.setItem('id', login._id);
-                sessionStorage.setItem('useremail', login.useremail);
-                console.log(sessionStorage.getItem('id')); 
-                 res.render('', {
-                     login: login,                         
-                    }
-                 )
-             }
-             else{
-                 console.log("User doesnot exist")
-                 res.render('login',{
-                     
-                     err: true
-                 })
-             }
-         }).catch(err=>{
-             console.log(err);
-         })
-        });
-        
+    app.post("/studentlogin", function (req, res) {
+        Student.findOne({
+          useremail: req.body.useremail,
+          password: req.body.password,
+        })
+          .then((login) => {
+            if (login) {
+              console.log(login);
+              sessionStorage.setItem("id", login._id);
+              sessionStorage.setItem("useremail", login.useremail);
+              console.log(sessionStorage.getItem("id"));
+              res.render("", {
+                login: login,
+              });
+            } else {
+              console.log("User doesnot exist");
+              res.render("studentlogin", {
+                err: true,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+      app.post("/adminlogin", function (req, res) {
+        Admin.findOne({
+          email: req.body.email,
+          password: req.body.password,
+        })
+          .then((login) => {
+            if (login) {
+              console.log(login);
+              sessionStorage.setItem("id", login._id);
+              sessionStorage.setItem("useremail", login.email);
+              console.log(sessionStorage.getItem("id"));
+              res.render("", {
+                login: login,
+              });
+            } else {
+              console.log("User doesnot exist");
+              res.render("adminlogin", {
+                err: true,
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+              
 // rendering the task Page
 app.get('/task', function(req, res){
     var id=sessionStorage.getItem('id');
