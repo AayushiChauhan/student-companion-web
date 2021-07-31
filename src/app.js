@@ -409,7 +409,6 @@ app.get("/mycourse", function (req, res) {
 //     return res.render('', {
 //         // tittle: "Home",
 
-<<<<<<< HEAD
 //display the filtered course only
 app.get("/display-course", function (req, res) {
     Course.find(
@@ -433,69 +432,7 @@ app.get("/display-course", function (req, res) {
       }
     );
   });
-//create a new contact in our database
-app.post('/contact', async (req,res)=>{
-    try{
-        const registerEmployee= new Contact({
-            name:req.body.name,
-            email:req.body.email,
-            message:req.body.message,
-=======
-//         login: login,
-//         //demo:demo,
-//     })
 
-//display the filtered course only
-app.get("/display-course", function (req, res) {
-  Course.find(
-    {
-      $or: [
-        { course_cat: req.query.course_cat },
-        { course_faculty: req.query.course_faculty },
-        { course_credit: req.query.course_credit },
-      ],
-    },
-    function (err, course) {
-      if (err) {
-        console.log("Error in fetching tasks from db");
-        return;
-      }
-
-      return res.render("course", {
-        // tittle: "Home",
-        course: course,
-      });
-    }
-  );
-});
-// app.get('/task',(req,res)=>{ //get (go to) the task (hbs file)
-
-//     Task.find({}, function (err, docs) {
-//         if(err){
-//             console.log(err);
-//         }
-//         if(docs){
-//             console.log(docs);
-//             // var parth = document.getElementById("parth");
-//             // for(let i=0; i<2; i++){
-//             //     var p = document.createElement("p");
-//             //     var text = document.createTextNode(docs[i]);
-//             //     p.appendChild(text);
-//             //     parth.appendChild(p);
-//             // }
-//         }
-//         res.render("task");
-//     })
-// });
-
-/*app.get('/task',(req,res)=>{ //get (go to) the task (hbs file)
-        Task.find({},(err,taskDetails)=>{
-            if(err) console.log(err)
-            res.render('task',{taskDetails:taskDetails});
->>>>>>> f718c78fbccf89843dfc5c88977a0d0fbb813203
-        })
-     
-     });*/
 //create a new contact in our database
 app.post("/contact", async (req, res) => {
   try {
