@@ -1,0 +1,149 @@
+{{!-- handelbars (hbs) is a view engine of express --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    {{!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"> --}}
+    <title>My Tasks</title>
+</head>
+<body>
+    {{!-- <button class="btn btn-success">Fanstastic</button> 
+    use navbar.hbs file here in index file
+    --}}
+    {{>subnavbar}}
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses- Admin Panel</title>
+  </head>
+  <body>
+    {{!-- IMPORTANT NOTE: name field is very important to post data into mongodb --}}
+    
+<div class="container-fluid mt-5 contact-style">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+                <h1 class="text-center main-heading">Courses</h1>
+                <h1 class="text-center sub-heading">Managing course directory has become easier than ever before!</h1>
+               
+                <div class="row">
+                    <div class="col-md-8 col-12 mx-auto">
+
+                <form action="/adminCourses" method="POST">
+                <table class="table">
+                <thead>
+                  <tr class="table-active">
+                    <th >Add course name</th>
+                    <th >Add course category</th>
+                    <th >Add course credit</th>
+                    <th >Add course faculty</th>
+                    
+                    {{!-- <th >Add course Rating</th> --}}
+                  </tr>
+                </thead>
+            
+            
+                <tbody>
+                    <tr>
+                      <td> <input type="text" name="course_name"placeholder="course name" required></input></th>
+                      <td ><select name="course_cat" required>
+                                    <option value="" selected disabled hidden>Course Category</option>
+                                    <option>GER</option>
+                                    <option>Core</option>
+                                    <option>Major elective</option>
+                                    <option>Account</option>
+                                    <option>Life Science</option>
+                                    <option>Economics</option>
+
+                                </select></th>
+                      <td > <select name="course_credit" required>
+                                    <option value="" selected disabled hidden>Course Credit</option>
+                                    <option>1.5</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>OTHER</option>
+
+                        </select></th>
+                
+                       <td ><select name="course_faculty" required>
+                                    <option value="" selected disabled hidden>Course Faculty</option>
+                                    <option>Kuntal Patel</option>
+                                    <option>Ashok Ranade</option>
+                                    <option>Preeti Manek</option>
+                                    <option>Dhaval Patel</option>
+                                    <option>Shrikrishnan Divakaran</option>
+
+                        </select></th>
+                      {{!-- <td > <input type="number" name="course_rating" value="none"></th> --}}
+                      <td ><input type="submit"  class="btn btn-success"id="add" value="Add Course"></th>
+                    </tr>
+                </tbody>
+            
+            </table>
+                        
+        </form>
+                    <h1 align="center">Course List</h1>
+                    <form action="/delete-course" method="GET">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            
+                              <th style="font-size: 1.5rem; font-weight:900">Select</th>
+                              <th style="font-size: 1.5rem; font-weight:600;">Course Name</th>
+                              <th style="font-size: 1.5rem; font-weight:600;">Course Category</th>
+                              <th style="font-size: 1.5rem; font-weight:600;">Course Credit</th>
+                              <th style="font-size: 1.5rem; font-weight:600;">Course Faculty</th>
+                              <th style="font-size: 1.5rem; font-weight:600;">Course Rating</th>
+                            </tr>
+                          </thead>
+                        
+                    {{#each admincourse}}
+                    <tr>  
+                      <td> <input type="checkbox" name="{{this._id}}"></td>
+                      <td><p>{{this.course_name}}</p></td>
+                      <td><p>{{this.course_cat}}</p></td>
+                      <td><p>{{this.course_credit}}</p></td>
+                      <td><p>{{this.course_faculty}}</p></td>
+                      <td><p>{{this.course_rating}}</p></td>
+                
+                    </tr>                    
+                    {{/each}}
+                   
+</table>
+<div  align = "center"><input type="submit" class="btn btn-danger" value="DELETE TASK">
+                </div>
+                </form> 
+                     </div>
+            
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    {{!-- <form action="/task" method="POST">
+      <input type="text" placeholder="Task Name" name="name" />
+      <br />
+      <input type="text" placeholder="Task description" name="description" />
+      <br />
+      <input type="text" placeholder="due date" name="dueDate" />
+
+      <button type="submit">Submit</button>
+    </form> --}}
+  </body>
+</html>
+
+
+        {{!-- including jquery and bootstrap js here in this index.hbs file! --}}
+    <script src="../jq/jquery.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.js" type="text/javascript"></script>
+</body>
+</html>
