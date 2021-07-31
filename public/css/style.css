@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
 
 * {
-  font-family: "Poiret One", cursive;
+  font-family: "Times New Roman", cursive;
   font-weight: bold;
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 61%;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 li,
@@ -29,7 +30,7 @@ h3 {
 }
 
 .row {
-  margin: 0;
+  margin: 2;
 }
 
 .navbar-style {
@@ -52,8 +53,9 @@ h3 {
   color: #525252;
   text-transform: capitalize;
   letter-spacing: 0.1rem;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
   font-size: 1.9rem;
+
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
@@ -92,6 +94,10 @@ label {
   font-weight: bold;
   color: #000;
 }
+.course1 span{
+  background-color: #fff !important;
+  font-size: 18.7px !important;
+}
 
 .btn-style {
   padding: 12px 25px;
@@ -107,6 +113,7 @@ label {
   -o-transition: 0.5s all;
   -ms-transition: 0.5s all;
   transition: 0.5s all;
+  margin-top: 3%;
 }
 
 /* about us style starts  */
@@ -128,10 +135,14 @@ label {
 .service-style .sub-heading,
 .contact-style .sub-heading {
   font-size: 3rem;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   line-height: 2;
   color: #333;
   font-weight: 500;
+}
+.contact-style .sub-heading{
+  font-weight: 900 !important;
+  
 }
 
 /* our services style starts  */
@@ -145,6 +156,7 @@ label {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
+  margin-top: -5%;
 }
 
 .our-services {
@@ -170,7 +182,7 @@ label {
   font-weight: bold;
 }
 
-.our-services:hover h4,
+.our-services:hover h1,
 .our-services:hover p {
   color: #fff;
 }
@@ -308,4 +320,31 @@ th {
 /* When moving the mouse over the close button */
 .closebtn:hover {
   color: black;
+}
+
+.course-h1{
+  margin-top: 45%;
+  
+}
+
+.photo{
+  width: 55vw;
+  margin-top: 10%;
+}
+
+.task-td{
+  font-size: 18px;
+}
+
+.task1{
+  font-size: 14px;
+}
+
+.task3{
+  font-size: 13px;
+  margin-top: 3%;
+}
+
+#task-name{
+  font-size: 16px;
 }

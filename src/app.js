@@ -211,21 +211,28 @@ app.get('/mycourse', function(req, res){
 )});
 
 //display the filtered course only
-app.get('/display-course', function(req, res){
-   
-    Course.find({$or:[{course_cat:req.query.course_cat},{course_faculty:req.query.course_faculty},{course_credit:req.query.course_credit}]}, function(err,course){
-        if(err){
-            console.log('Error in fetching tasks from db');
-            return;
+app.get("/display-course", function (req, res) {
+    Course.find(
+      {
+        $or: [
+          { course_cat: req.query.course_cat },
+          { course_faculty: req.query.course_faculty },
+          { course_credit: req.query.course_credit },
+        ],
+      },
+      function (err, course) {
+        if (err) {
+          console.log("Error in fetching tasks from db");
+          return;
         }
-
-        return res.render('course', {
-            
-            course: course,
+  
+        return res.render("course", {
+          // tittle: "Home",
+          course: course,
         });
-    }
-)});
-
+      }
+    );
+  });
 //create a new contact in our database
 app.post('/contact', async (req,res)=>{
     try{
