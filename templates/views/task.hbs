@@ -30,37 +30,37 @@
         <div class="row">
             <div class="col-md-10 col-12 mx-auto">
                 <h1 class="text-center main-heading">Task Manager</h1>
-                <h1 class="text-center sub-heading">Managing tasks has become easier than ever before!</h1>
+                <h1 class="text-center sub-heading mt-3 mb-3">Managing tasks has become easier than ever before!</h1>
                
                 <div class="row">
-                    <div class="col-md-8 col-12 mx-auto">
+                    <div class="col-md-10 col-12 mx-auto">
 
                 <form action="/task" method="POST">
                 <table class="table">
                 <thead>
                   <tr class="table-active">
-                    <th >Add Task</th>
-                    <th >Description</th>
-                    <th >date</th>
-                    <th ></th>
+                    <th class="task-td">Add Task</th>
+                    <th class="task-td">Description</th>
+                    <th class="task-td">Date</th>
+                    <th class="task-td"></th>
                   </tr>
                 </thead>
             
             
                 <tbody>
                     <tr>
-                      <td> <input type="text" name="name"placeholder="task name" required></input></th>
-                      <td >  <select name="description" required>
+                      <td> <input class="pt-2 pb-1 ps-3" type="text" name="name"placeholder="task name" required></input></th>
+                      <td >  <select class="pt-2 pb-2 ps-2 pe-2 task1" name="description" required>
 
-                        <option>PERSONAL</option>
-                        <option>WORK</option>
-                        <option>SCHOOL</option>
-                        <option>CLEANING</option>
-                        <option>OTHER</option>
+                        <option>Personal</option>
+                        <option>Work</option>
+                        <option>School</option>
+                        <option>Cleaning</option>
+                        <option>Other</option>
 
                     </select></th>
-                      <td > <input type="date" name="date" required></th>
-                      <td ><input type="submit"  class="btn btn-success"id="add" value="ADD TASK"></th>
+                      <td > <input class="pt-1 pb-1 ps-3 pe-3 task1" type="date" name="date" required></th>
+                      <td ><input type="submit"  class="btn btn-success pt-1 pb-1 ps-3 pe-3 task1"id="add" value="ADD TASK"></th>
                     </tr>
                 </tbody>
             
@@ -83,16 +83,16 @@
                         </div>
                         <button type="submit" class="btn-style btn-primary">Submit</button> --}}
                         </form>
-                    <h1 align="center">TASKS LIST</h1>
+                    <h1 style="color: #fd5c63;" class=" mt-5 mb-3">Tasks List</h2>
                     <form action="/delete-task" method="GET">
                     <table class="table">
                         <thead>
                             <tr>
                             
-                              <th style="font-size: 1.5rem; font-weight:900">Select</th>
-                              <th style="font-size: 1.5rem; font-weight:600;">Task</th>
-                              <th style="font-size: 1.5rem; font-weight:600;">Description</th>
-                            <th style="font-size: 1.5rem; font-weight:600;">due date</th>
+                              <th style="font-size: 2rem; font-weight:900">Select</th>
+                              <th style="font-size: 2rem; font-weight:600;">Task</th>
+                              <th style="font-size: 2rem; font-weight:600;">Description</th>
+                            <th style="font-size: 2rem; font-weight:600;">Due date</th>
                             </tr>
                           </thead>
                         {{!-- <ul class="people_list">
@@ -105,11 +105,11 @@
 
                     {{#each task}}
                     <tr>  
-                      <td> <input type="checkbox" name="{{this._id}}"></td>
-                      <td><p id="task-name">{{this.name}}</p></td>
-                      <td><p id="task-description">{{this.description}}</p></td>
-                      <td><p id="due-date">{{this.date}}</p></td>
-                      </tr>                    
+                      <td> <input class="mt-3" type="checkbox" name="{{this._id}}"></td>
+                      <td><p class="mt-2" id="task-name">{{this.name}}</p></td>
+                      <td><p class="mt-2" id="task-description">{{this.description}}</p></td>
+                      <td><p class="mt-2" id="due-date">{{this.date}}</p></td>
+                    </tr>                    
                     {{/each}}
                     {{!--               <td> <input type="checkbox" name="<%= i._id %>" ></td>
                     <td>{{this.name}}</td>
@@ -161,6 +161,89 @@
   </body>
 </html>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"> --}}
+<style>
+        .star{
+          color: goldenrod;
+          font-size: 2.0rem;
+          padding: 0 1rem; /* space out the stars */
+        }
+        .star::before{
+          content: '\2606';    /* star outline */
+          cursor: pointer;
+        }
+        .star.rated::before{
+          /* the style for a selected star */
+          content: '\2605';  /* filled star */
+        }
+        
+        .stars{
+            counter-reset: rateme 0;   
+            font-size: 2.0rem;
+            font-weight: 900;
+        }
+        .star.rated{
+            counter-increment: rateme 1;
+        }
+        .stars::after{
+            content: counter(rateme) '/5';
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Course Rating</h1>
+    <div class="stars" data-rating="3">
+        <span class="star">&nbsp;</span>
+        <span class="star">&nbsp;</span>
+        <span class="star">&nbsp;</span>
+        <span class="star">&nbsp;</span>
+        <span class="star">&nbsp;</span>
+    </div>
+  
+    
+    <script>
+        
+        //initial setup
+        document.addEventListener('DOMContentLoaded', function(){
+            let stars = document.querySelectorAll('.star');
+            stars.forEach(function(star){
+                star.addEventListener('click', setRating); 
+            });
+            
+            let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
+            let target = stars[rating - 1];
+            target.dispatchEvent(new MouseEvent('click'));
+        });
+
+        function setRating(ev){
+            let span = ev.currentTarget;
+            let stars = document.querySelectorAll('.star');
+            let match = false;
+            let num = 0;
+            stars.forEach(function(star, index){
+                if(match){
+                    star.classList.remove('rated');
+                }else{
+                    star.classList.add('rated');
+                }
+                //are we currently looking at the span that was clicked
+                if(star === span){
+                    match = true;
+                    num = index + 1;
+                }
+            });
+            document.querySelector('.stars').setAttribute('data-rating', num);
+        }
+        
+    </script>
+</body>
+</html>
 
         {{!-- including jquery and bootstrap js here in this index.hbs file! --}}
     <script src="../jq/jquery.js" type="text/javascript"></script>
