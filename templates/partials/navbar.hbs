@@ -1,78 +1,80 @@
+{{! To have navbar in the center }}
 
-<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-<script>
-        function func(){
-            var id=sessionStorage.id;
-            console.log(sessionStorage.id);
-            if(sessionStorage.id){
-              document.getElementById("in").style.visibility="hidden";
-            console.log(sessionStorage.id);
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
 
-            }else{
-              document.getElementById("out").style.visibility="hidden";
-            }
-          } 
-        window.onload = func;
+  </head>
+  <body>
+    <div class="container-fluid mt-5 navbar-style">
+      <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
 
-        </script>
-</head>
-<body>
-  {{!-- To have navbar in the center --}}
-  <div class="container-fluid mt-5 navbar-style">
-        <div class="row">
-            <div class="col-md-10 col-12 mx-auto">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/" id="logo">Student Ally</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-           
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/" id="logo">Student Ally</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      
-      <ul onload="func()" class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item px-3">
-          <a class="nav-link active" aria-current="page" href="/index">Home</a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link" href="/task">My Tasks</a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link" href="/course">Course Catalog</a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link" href="/mycourse">My courses</a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link" href="/about">About Us</a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link" href="/contact">Contact Us</a>
-        </li>
-        
-        <li id="in" class="nav-item px-3">
-          <a class="nav-link" href="/login">Logout</a>
-        </li>
-        {{!-- <li id="out" class="nav-item px-3">
-          <a class="nav-link" href="/logout">Logout</a>
-        </li> --}}
-        
-      </ul>
-      
-      
+                <ul onload="func()" class="navbar-nav ms-auto mb-2 mb-lg-0">
+                  <li class="nav-item px-3">
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      href="/index"
+                    >Home</a>
+                  </li>
+                  <li class="nav-item px-3">
+                    <a class="nav-link" href="/task">My Tasks</a>
+                  </li>
+                  <li class="nav-item px-3">
+                    <a class="nav-link" href="/course">Course Catalog</a>
+                  </li>
+                  <li class="nav-item px-3">
+                    <a class="nav-link" href="/mycourse">My courses</a>
+                  </li>
+                  <li class="nav-item px-3">
+                    <a class="nav-link" href="/about">About Us</a>
+                  </li>
+                  <li class="nav-item px-3">
+                    <a class="nav-link" href="/contact">Contact Us</a>
+                  </li>
+                  {{! <li id="out" class="nav-item px-3">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                  <script>
+                    if(isset(sessionStorage['id'])){ } else { }
+                  </script> }}
+                  <li id="in" class="nav-item px-3">
+                    <a class="nav-link" href="/login">Logout</a>
+                  </li>
+                </ul>
+                {{! <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> }}
+
+              </div>
+            </div>
+          </nav>
+
+        </div>
+      </div>
+      {{!  closing  div class="row" }}
     </div>
-  </div>
-</nav>
-
-            </div> 
-         </div> {{!--  closing  div class="row" --}}
-    </div> {{!--   closing div class="container-fluid" --}}
-</body>
+    {{!   closing div class="container-fluid" }}
+  </body>
 </html>

@@ -1,6 +1,8 @@
 //creating a schema
-const mongoose=require("mongoose");
 
+const mongoose=require("mongoose");
+//npm install validator 
+//This library validates and sanitizes strings only.
 const validator=require("validator");
 
 const courseSchema= new mongoose.Schema({
@@ -26,8 +28,10 @@ const courseSchema= new mongoose.Schema({
     },
     
 })
-
+//we need a collection
+//here parameter name should be singular only and also capitalized!even if it's plural like Users write User only
+//and it will be automatically understood as Users if Users exist.
 const Course=new mongoose.model("Course",courseSchema);
-
+//export the schema named "Task"
 module.exports=Course;
 

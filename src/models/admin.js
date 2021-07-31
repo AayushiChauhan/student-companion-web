@@ -5,10 +5,15 @@ var AdminSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    email:{
+        type: String,
+        required: true,
+        unique:true
+    },
     userId: {
         type: String,
         unique: true,
-        required: true
+        
     },
     password: {
         type: String,
@@ -17,3 +22,4 @@ var AdminSchema = mongoose.Schema({
 })
 
 const Admin=mongoose.model('admin', AdminSchema)
+module.exports=Admin;
