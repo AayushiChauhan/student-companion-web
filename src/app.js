@@ -124,7 +124,9 @@ app.get("/adminlogin", (req, res) => {
 app.get("/adminPanel", (req, res) => {
   res.render("adminPanel");
 });
-
+app.get("/rating", (req, res) => {
+  res.render("rating");
+});
 const generateAuthToken = () => {
   return crypto.randomBytes(30).toString("hex");
 };
@@ -370,7 +372,7 @@ app.get("/enrollStudent", function (req, res) {
       }
     }
   );
-  return res.redirect("back");
+  return res.redirect("/adminPanel");
 });
 // app.get('/course', function(req, res) {
 //     Mycourse.aggregate(

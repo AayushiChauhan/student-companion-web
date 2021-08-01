@@ -74,24 +74,24 @@
                             <th style="font-size: 1.5rem; font-weight:600;">Course Category</th>
                             <th style="font-size: 1.5rem; font-weight:600;">Course Credit</th>
                             <th style="font-size: 1.5rem; font-weight:600;">Course Faculty</th>
-                            <th style="font-size: 1.5rem; font-weight:600;">Course Rating</th>
+                        
                             </tr>
                           </thead>
 
                     {{#each mycourse}}
                     <tr>  
-                    <td>
+                    {{!-- <td>
                     <button class="btn" id="sure">
-                    <p id="course-name" style="font: size 25px;font-weight:600"><i class="fas fa-plus" style="color:mediumslateblue;"></i>{{this.course_name}}</button>
-                      </p>
-                      {{!-- <button onclick="choose()">{{this.course_name}}</button> --}}
-                      </td>
+                    {{!-- <p id="course-name" style="font: size 25px;font-weight:600"><i class="fas fa-plus" style="color:mediumslateblue;"></i>{{this.course_name}}</button>
+                      </p> --}}
+                      {{!-- <button onclick="choose()">{{this.course_name}}</button> 
+                      </td> --}}
                     
-       
-                      <td><p id="course-category">{{this.course_cat}}</p></td>
+                    <td><a href="/rating" class="btn">{{this.course_name}}</a></td>
+                     <td><p id="course-category">{{this.course_cat}}</p></td>
                       <td><p id="course-credit">{{this.course_credit}}</p></td>
                       <td><p id="course-faculty">{{this.course_faculty}}</p></td>
-                      <td><p id="course-rating">{{this.course_rating}}</p></td>
+                      {{!-- <td><p id="course-rating">{{this.course_rating}}</p></td> --}}
                     </tr>                    
                     {{/each}}
                     <script>
