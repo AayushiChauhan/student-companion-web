@@ -25,7 +25,7 @@ const mycourseSchema= new mongoose.Schema({
         required:true,
     },
     studentId:{
-        type:String,
+        type:[String],
     }
 })
 //we need a collection

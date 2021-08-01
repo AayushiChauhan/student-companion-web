@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    
-    
+    {{!-- bootbox cdn --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.js"></script>    
     
     {{!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"> --}}
     <title>My Tasks</title>
@@ -29,56 +30,6 @@
                
                 <div class="row">
                     <div class="col-md-8 col-12 mx-auto">
-
-                {{!-- <form action="/task" method="POST">
-                <table class="table">
-                <thead>
-                  <tr class="table-active">
-                    <th >Add Task</th>
-                    <th >Description</th>
-                    <th >date</th>
-                    <th ></th>
-                  </tr>
-                </thead>
-            
-            
-                <tbody>
-                    <tr>
-                      <td> <input type="text" name="name"placeholder="task name" required></input></th>
-                      <td >  <select name="description" required>
-
-                        <option>PERSONAL</option>
-                        <option>WORK</option>
-                        <option>SCHOOL</option>
-                        <option>CLEANING</option>
-                        <option>OTHER</option>
-
-                    </select></th>
-                      <td > <input type="date" name="date" required></th>
-                      <td ><input type="submit"  class="btn btn-success"id="add" value="ADD TASK"></th>
-                    </tr>
-                </tbody>
-            
-            </table>
-                        {{!-- <div class="form-group">
-                            <label for="exampleInputName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="exampleInputName" 
-                            placeholder="Enter Task Name" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1" class="form-label">Task Description</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" 
-                            placeholder="Enter task description" name="description">
-                            
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputMessage">Message</label>
-                            <input type="text" class="form-control" id="exampleInputName"
-                            placeholder="Of format dd-mm-yyyy" name="dueDate">
-                        </div>
-                        <button type="submit" class="btn-style btn-primary">Submit</button> --}}
-                        </form> --}}
-                    {{!-- <h1 align="center">TASKS LIST</h1> --}}
                     
                     <form action="/enrollStudent" method="GET">
                     <table class="table">
@@ -105,8 +56,11 @@
                       </tr>                    
                     {{/each}}                          
 </table>
-<div  align = "center"><input type="submit" class="btn btn-danger" id="show-modal"value="enroll now">
-                </div>></form> 
+
+<div  align = "center"><input type="submit" class="btn btn-primary" value="enroll now">
+                </div>
+              
+                </form> 
                      </div>
             
                 
@@ -114,36 +68,38 @@
         </div>
     </div>
 </div>
-
-    {{!-- <div class="modal">
-        <div class="modal_content">
-            <h1>Enroll Students</h1>
-            <form method="POST">
-             <select name="course_name" required>
-                        <option value="" selected disabled hidden>Course Name</option>
-                        {{#each course}}
-                        <option>{{this.course_name}}</option>
-                        {{/each}}
-            </select>
-            <input type="submit" class="btn btn-danger" value="enroll">
-            </form>
-        </div>
-    </div> --}}
-    {{!-- <form action="/task" method="POST">
-      <input type="text" placeholder="Task Name" name="name" />
-      <br />
-      <input type="text" placeholder="Task description" name="description" />
-      <br />
-      <input type="text" placeholder="due date" name="dueDate" />
-
-      <button type="submit">Submit</button>
-    </form> --}}
-  </body>
-</html>
-
+                
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+$('#myForm').on('submit', function(e){
+  $('#myModal').modal('show');
+  e.preventDefault();
+});
+</script>
+    
+ </body>
+ </html>
 
         {{!-- including jquery and bootstrap js here in this index.hbs file! --}}
     <script src="../jq/jquery.js" type="text/javascript"></script>
     <script src="../js/bootstrap.js" type="text/javascript"></script>
+    
+    
 </body>
 </html>

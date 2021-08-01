@@ -346,19 +346,30 @@ app.get("/adminStudents", function (req, res) {
 });
 app.get("/enrollStudent", function (req, res) {
   // get the id from query
-  // var id = req.query;
+  var id = req.query;
+  var course_id = "610604375dad51865efebd30";
+  var studentids = [];
 
-  // // checking the number of tasks selected to delete
-  // var count = Object.keys(id).length;
-  // for (let i = 0; i < count; i++) {
-  //   // finding and deleting tasks from the DB one by one using id
-
-  //   Student.findByIdAndDelete(Object.keys(id)[i], function (err) {
-  //     if (err) {
-  //       console.log("error in deleting course");
-  //     }
-  //   });
-  // }
+  // checking the number of tasks selected to delete
+  var count = Object.keys(id).length;
+  for (let i = 0; i < count; i++) {
+    studentids.push(Object.keys(id)[i]);
+  }
+  console.log(studentids);
+  
+  Mycourse.findByIdAndUpdate(
+    course_id,
+    { $push: { studentId: { $each: studentids } } },
+    { upsert: true },
+    function (err, docs) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Students enrolled succesfully ");
+        // console.log("Updated User : ", docs);
+      }
+    }
+  );
   return res.redirect("back");
 });
 // app.get('/course', function(req, res) {
