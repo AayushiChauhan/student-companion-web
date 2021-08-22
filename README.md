@@ -3,6 +3,10 @@ Student Ally
 A Student Companion website used to help students efficiently manage their schedule and off-course academic courses :wink:
 Author: Priyanka Patel and Aayushi Chauhan
 
+Steps to run project:
+--> Clone project in local environment
+-->Install required libraries by executing command npm install library_name;
+-->command to run the project: npm run dev
 Project description:
 
 Students are involved in different activities during a semester. Their work is generally scattered over so many different platforms and it is tedious to keep track of each platform. So, we came up with a platform Student Ally that enables students to manage their day-to-day tasks, as well as keep track of their academic progress. 
