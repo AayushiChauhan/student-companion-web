@@ -1,6 +1,6 @@
 # student-companion-web
 Student Ally
-A Student Companion website used to help students efficiently manage their schedule and off-course academic courses :wink:
+A Student Companion website used to help students efficiently manage their schedule and of-course academic courses :wink:
 Author: Priyanka Patel and Aayushi Chauhan
 
 Steps to run project:
